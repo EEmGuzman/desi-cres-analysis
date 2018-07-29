@@ -59,10 +59,12 @@ print('The Ideal Fiber Rows are {},\nThe number of Ideal Fibers are {}'.format(g
 
 # Determining which fibers have 2 or more parameters >2*RMS away from median
 rnum3bparam = sorted(list(set(badparamrnum0) & set(badparamrnum1) & set(badparamrnum2)))
+
 rnum2bparams1 = set(badparamrnum0) & set(badparamrnum1)
 rnum2bparams2 = set(badparamrnum0) & set(badparamrnum2)
 rnum2bparams3 = set(badparamrnum1) & set(badparamrnum2)
-rnum2bparam = sorted(list(rnum2bparams1|rnum2bparams2|rnum2bparams3))
+rnum2bparamint = rnum2bparams1|rnum2bparams2|rnum2bparams3
+rnum2bparam = sorted(list(rnum2bparamint.difference(set(rnum3bparam))))
 
 #print('Row with 3 bad params {} '.format(rnum3bparam))
 #print('Row with 2 bad params {} '.format(rnum2bparam))
