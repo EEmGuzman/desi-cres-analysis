@@ -47,7 +47,7 @@ Example:
 spectraplot.py information
 ----------------------------
 Usage:  
-./spectraplot.py FRAMEfilename idealfiberrownumber nearbyfiberrownumber worstfiberrownumber OUTfilename.png
+./spectraplot.py FRAMEfilename idealfiberrownumber nearbyfiberrownumber worstfiberrownumber  
 
 Output:  
 A plot of the overlaid sprectrums of the fibers identified by their row in the WSIGMA array (output of ./checkrescode.py).
@@ -70,7 +70,7 @@ Example:
 residplot.py information
 -------------------------
 Usage:  
-./residplot.py framefile idealfiberrow worstfiberrow outfilename
+./residplot.py framefile idealfiberrow worstfiberrow  
 
 Output:  
 -outfilename.eps  
