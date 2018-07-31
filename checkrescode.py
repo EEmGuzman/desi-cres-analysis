@@ -13,6 +13,9 @@ with fits.open(str(sys.argv[1])) as file_psf:
 with fits.open(str(sys.argv[2])) as infile:
     fibermap = infile[5].data
     fiberids = fibermap['FIBER']
+    cam = infile[0].header['CAMERA']
+    expid = str(infile[0].header['EXPID'])
+    flavor = infile[0].header['FLAVOR']
 
 # Variables for plot
 p0 = wsigma_array[:, 0:1].flatten()
@@ -108,7 +111,7 @@ if len(rnum3bparam) != 0:
 
 bfibinfo = zip(rnum2bparam, finfibid, findiffp0, findiffp1, findiffp2)
 bfibinfo_3bp = zip(rnum3bparam, finfibid_3bp, findiffp0_3bp, findiffp1_3bp, findiffp2_3bp)
-with open(str(sys.argv[3]), 'w') as inputfile:
+with open('info-{}-{}{}.csv'.format(cam,expid,flavor), 'w') as inputfile:
     dwrite = csv.writer(inputfile)
     dwrite.writerow(["RNum","Fiber_ID", 'LPC_p0_diff', 'LPC_p1_diff','LPC_p2_diff'])
     for row in bfibinfo:

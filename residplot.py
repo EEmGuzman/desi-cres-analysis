@@ -40,8 +40,5 @@ plt.scatter(worstx, worstydiff/1000, s=8, marker='o')
 plt.axhline(y=0, linestyle='--', color='red')
 frame2.set_ylabel('Residual')
 plt.xlabel('Wavelength (Angstroms)')
-plt.savefig(str(sys.argv[4]))
+plt.savefig('residp-{}-{}{}.eps'.format(camera,str(expid),flavor))
 plt.close(fig1)
-
-
-

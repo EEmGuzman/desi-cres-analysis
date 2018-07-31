@@ -10,7 +10,7 @@ Analysis consists of using three programs: checkrescode.py, spectraplot.py, and 
 checkrescode.py information
 ----------------------------
 Usage:   
-./checkrescode.py PSFfilename FRAMEfilename OUTfilename.csv
+./checkrescode.py PSFfilename FRAMEfilename
 
 Output:
 
@@ -41,7 +41,7 @@ A list with all Fibers that have 3 'bad' coefficients. Printed to stdout. These 
 
 Example:
 
-	./checkrescode.py psf-r0-00003891.fits frame-r0-00003891.fits infobfib-r0-00003891.csv
+	./checkrescode.py psf-r0-00003891.fits frame-r0-00003891.fits
 
 
 spectraplot.py information
@@ -60,14 +60,11 @@ The row number of the ideal fiber for which you want to plot the spectrum. Chose
 The row number of a fiber close to the chosen ideal which has only ONE bad parameter.
 
 - worstfiberrownumber  
-The row number of the worst fiber as identified in the csv output file from checkrescode.py
-
-- outfilename.png  
-An extension must be provided but does not have to be .png. Choose your own image format.
+The row number of the worst fiber as identified in the csv output file from checkrescode.py  
 
 Example:
 
-	./spectraplot.py frame-r0-00003891.fits 429 430 432 r0-00003891-2bp.png
+	./spectraplot.py frame-r0-00003891.fits 429 430 432
 
 
 residplot.py information
@@ -76,10 +73,11 @@ Usage:
 ./residplot.py framefile idealfiberrow worstfiberrow outfilename
 
 Output:  
+-outfilename.eps  
 A plot of worst fiber spectrum over ideal fiber spectrum with residual subplot.
 
 Example:
 
-	./residplot.py frame-r0-00003891.fits 429 432 r0-00003891-resid.eps
+	./residplot.py frame-r0-00003891.fits 429 432
 
 
