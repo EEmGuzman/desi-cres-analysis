@@ -15,7 +15,7 @@ Usage:
 Output:
 
 - OUTfilename.csv  
-A csv file with a header of Row Number, Fiber ID, Legendre Polynomial Coefficient 1 Difference, Legendre Polynomial Coefficient 2 Difference, Legendre Polynomial Coefficient 2 Difference. Row Number is to be used as input for the spectraplot.py script. It represents the row of the fiber in the original WSIGMA array. The Legendre Polynomial Coefficient Differences are (Coefficient value - median coefficient across the 500 fibers). It is used as a measure of how 'bad' a coefficient is. The larger the value, the worse the coefficient. This file is used to determine which fibers to plot. Check the row number of the fiber you want to plot!
+A csv file with a header of Row Number, Fiber ID, Legendre Polynomial Coefficient 1 Difference, Legendre Polynomial Coefficient 2 Difference, Legendre Polynomial Coefficient 2 Difference. Row Number is to be used as input for the spectraplot.py script. It represents the row of the fiber in the original WSIGMA array. The Legendre Polynomial Coefficient Differences are (Coefficient value - median coefficient across the 500 fibers). It is used as a measure of how 'bad' a coefficient is. The larger the value, the worse the coefficient. For 3 bad coefficients there is an extra column in the csv file. The sum of the absolute differences. This value was used to determine which fiber was the worst. This file is used to determine which fibers to plot. Check the row number of the fiber you want to plot!
 
 - Medians  
 The WSIGMA array median values used are printed to stdout. Output is in an array of 3 values corresponding to [p0, p1, p2] coefficients.
