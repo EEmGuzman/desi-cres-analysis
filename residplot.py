@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-#./residplot.py framefile idealfiberrow worstfiberrow outputfname
+#./residplot.py framefile idealfiberrow worstfiberrow
 
 import sys
 import numpy as np
 import matplotlib.pyplot as plt
+from matplotlib import gridspec
 from astropy.io import fits
 
 def getdata(fiberrow):
@@ -28,17 +29,27 @@ FibIDworst = fiberids[int(sys.argv[3])]
 worstydiff = worsty - idealy
 
 fig1 = plt.figure(1)
-frame1 = fig1.add_axes((.1,.3,.8,.6))
-plt.plot(idealx, idealy/1000, c='k',label='Ideal Spectrum (Fiber ID {})'.format(FibIDideal))
-plt.plot(worstx, worsty/1000, c='b',label='Worst Spectrum (Fiber ID {})'.format(FibIDworst))
-plt.title('Camera: {}, EXPID: {}, Flavor: {}'.format(camera, expid, flavor))
-plt.ylabel('Flux ($10^{3}$)')
-plt.autoscale(enable=True, axis='both', tight=False)
-plt.legend()
-frame2 = fig1.add_axes((.1,.1,.8,.2))
-plt.scatter(worstx, worstydiff/1000, s=8, marker='o')
-plt.axhline(y=0, linestyle='--', color='red')
-frame2.set_ylabel('Residual')
+gs = gridspec.GridSpec(2, 1, height_ratios=[2, 1])
+
+# Subplot 1
+ax0 = plt.subplot(gs[0])
+ax0.plot(idealx, idealy/1000, c='k',label='Ideal Spectrum (Fiber ID {})'.format(FibIDideal))
+ax0.plot(worstx, worsty/1000, c='b',label='Worst Spectrum (Fiber ID {})'.format(FibIDworst))
+ax0.legend()
+ax0.set_ylabel('Flux ($10^{3}$)')
+ax0.set_title('Camera: {}, EXPID: {}, Flavor: {}'.format(camera, expid, flavor))
+
+# Subplot 2
+ax1 = plt.subplot(gs[1], sharex = ax0)
+ax1.scatter(worstx, worstydiff/1000, s=8, marker='o')
+ax1.axhline(y=0, linestyle='--', color='red')
+plt.setp(ax0.get_xticklabels(), visible=False)
+yticks = ax1.yaxis.get_major_ticks()
+yticks[-1].label1.set_visible(False)
+ax1.set_ylabel('Residual')
 plt.xlabel('Wavelength (Angstroms)')
+
+plt.autoscale(enable=True, axis='both', tight=False)
+plt.subplots_adjust(hspace=.0)
 plt.savefig('residp-{}-{}{}.eps'.format(camera,str(expid),flavor))
 plt.close(fig1)
