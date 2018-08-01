@@ -92,6 +92,7 @@ finfibid_3bp = []
 findiffp0_3bp = []
 findiffp1_3bp = []
 findiffp2_3bp = []
+difftotval_3bp = []
 if len(rnum2bparam) != 0:
     counter = 0
     for value in rnum2bparam:
@@ -107,15 +108,18 @@ if len(rnum3bparam) != 0:
         findiffp0_3bp.append(diffp0[value])
         findiffp1_3bp.append(diffp1[value])
         findiffp2_3bp.append(diffp2[value])
+        difftotval_3bp.append(abs(diffp0[value]) + abs(diffp1[value]) + abs(diffp2[value]))
         counter += 1
 
 bfibinfo = zip(rnum2bparam, finfibid, findiffp0, findiffp1, findiffp2)
-bfibinfo_3bp = zip(rnum3bparam, finfibid_3bp, findiffp0_3bp, findiffp1_3bp, findiffp2_3bp)
+bfibinfo_3bp = zip(rnum3bparam, finfibid_3bp, findiffp0_3bp, findiffp1_3bp, findiffp2_3bp, difftotval_3bp)
 with open('info-{}-{}{}.csv'.format(cam,expid,flavor), 'w') as inputfile:
     dwrite = csv.writer(inputfile)
+    dwrite.writerow(["2 Bad Coefficients"])
     dwrite.writerow(["RNum","Fiber_ID", 'LPC_p0_diff', 'LPC_p1_diff','LPC_p2_diff'])
     for row in bfibinfo:
         dwrite.writerow(row)
     dwrite.writerow(["3 Bad Coefficients"])
+    dwrite.writerow(["RNum","Fiber_ID", 'LPC_p0_diff', 'LPC_p1_diff','LPC_p2_diff','abs_total_diff'])
     for row in bfibinfo_3bp:
         dwrite.writerow(row)
